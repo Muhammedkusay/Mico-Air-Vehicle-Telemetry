@@ -23,12 +23,15 @@ function App() {
   //   "longitude": 36.2766,
   // })
 
-  if (!telemetry) {
-    return <div className='w-fit mx-auto mt-12'><ConnectionState websocket={connected} mavlink={telemetry?.connection} /></div>
-  }
+  const [connectionState, setConnectionState] = useState(false)
 
-  const checkConnection = () => {
-    return telemetry.connection && connected
+  useEffect(() => {
+    setConnectionState(telemetry?.connection && connected)
+
+  }, [telemetry, connected])
+
+  if (!connectionState) {
+    return <div className='w-fit mx-auto mt-12'><ConnectionState websocket={connected} mavlink={telemetry?.connection} /></div>
   }
 
   return(
@@ -38,7 +41,8 @@ function App() {
         <h1 className='text-2xl font-semibold text-slate-700'>MAVLink Telemetry</h1>
         <Battery battery_remaining={telemetry.battery_remaining}/>
       </header>
-      {checkConnection() && <div>
+      {/* works if mavlink and websocket are connected */}
+      {connectionState && <div>
         <div className="flex flex-col lg:flex-row items-center justify-around gap-12 mx-auto">
           <Map telemetry={telemetry}/>
           <Pfd telemetry={telemetry}/>
