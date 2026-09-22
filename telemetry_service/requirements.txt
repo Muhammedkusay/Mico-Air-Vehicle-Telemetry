@@ -1,0 +1,4 @@
+pymavlink
+websockets
+
+pip install websockets
