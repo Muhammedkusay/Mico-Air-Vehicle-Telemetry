@@ -5,8 +5,8 @@ from time import time
 
 telemetry = {
     "connection": False,
+    "vehicle_id": None,
     "last_update": None,
-
     "mode": None,
     "armed": False,
     "latitude": None,
@@ -41,6 +41,7 @@ def update_telemetry():
     message_type = msg.get_type()
 
     if message_type == "HEARTBEAT":
+        telemetry["vehicle_id"] = connection.target_system
         telemetry["mode"] = mavutil.mode_string_v10(msg)
         telemetry["armed"] = bool(
             msg.base_mode & mavutil.mavlink.MAV_MODE_FLAG_SAFETY_ARMED
@@ -57,7 +58,7 @@ def update_telemetry():
         telemetry["yaw"] = math.degrees(msg.yaw) / 1e7 
 
     elif message_type == "VFR_HUD":
-        telemetry["ground_speed"] = msg.groundspeed / 1000
+        telemetry["ground_speed"] = msg.groundspeed
         telemetry["heading"] = msg.heading
         telemetry["climb"] = msg.climb
 

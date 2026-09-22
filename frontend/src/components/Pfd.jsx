@@ -19,6 +19,11 @@ export default function Pfd({telemetry}) {
                 <p className="font-semibold">Mode</p>
                 <p>{telemetry.mode}</p>
             </PfdCard>
+            {/* ground_speed */}
+            <PfdCard style={"top-2/6 left-0 bg-slate-100 outline outline-slate-300"}>
+                <p className="font-semibold">Speed</p>
+                <p>{Math.round(telemetry.ground_speed)}m/s</p>
+            </PfdCard>
             {/* altitude */}
             <PfdCard style={"top-1/2 right-0 bg-slate-100 outline outline-slate-300"}>
                 <p className="font-semibold">Alt</p>

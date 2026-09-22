@@ -24,7 +24,7 @@ function App() {
   // })
 
   if (!telemetry) {
-    return <h1>websocket connection lost. No telemetry</h1>
+    return <div className='w-fit mx-auto mt-12'><ConnectionState websocket={connected} mavlink={telemetry?.connection} /></div>
   }
 
   const checkConnection = () => {
