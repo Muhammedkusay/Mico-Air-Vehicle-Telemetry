@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Flight;
+
 class Telemetry extends Model
 {
     protected $fillable = [
-        'vehicle_id',
+        'flight_id',
         'mode',
         'armed',
         'latitude',
@@ -26,7 +28,7 @@ class Telemetry extends Model
         'satellites',
     ];
 
-    public function vehicle() {
-        return $this->belongsTo(vehicle::class);
+    public function flight() {
+        return $this->belongsTo(Flight::class);
     }
 }

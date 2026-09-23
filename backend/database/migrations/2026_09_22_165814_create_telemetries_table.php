@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('telemetries', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('vehicle_id')
-            ->constrained()
+            $table->foreignId('flight_id')
+            ->constrained('flights')
             ->cascadeOnDelete();
             
             $table->string('mode')->nullable();

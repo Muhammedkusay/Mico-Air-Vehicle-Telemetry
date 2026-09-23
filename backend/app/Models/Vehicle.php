@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Flight;
+
 class Vehicle extends Model
 {
     protected $fillable = [
@@ -11,7 +13,7 @@ class Vehicle extends Model
         'system_id',
     ];
 
-    public function telemetries() {
-        return $this->hasMany(Telemetry::class);
+    public function flights() {
+        return $this->hasMany(Flight::class);
     }
 }

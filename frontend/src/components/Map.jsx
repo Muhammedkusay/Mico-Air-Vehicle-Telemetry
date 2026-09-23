@@ -55,7 +55,7 @@ export default function Map({telemetry}) {
     
     return (
         <MapContainer
-            center={[telemetry?.latitude, telemetry?.longitude]}
+            center={[telemetry?.latitude || 33.5143656, telemetry?.longitude || 36.2736165]}
             zoom={16}
             style={{ height: "500px", width: "100%", borderRadius: '12px', border:'2px solid #ccc', zIndex: '1' }}
         >
@@ -64,7 +64,7 @@ export default function Map({telemetry}) {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
 
-            <Marker ref={markerRef} position={[telemetry?.latitude, telemetry?.longitude]} icon={droneIcon} rotationOrigin="center center">
+            <Marker ref={markerRef} position={[telemetry?.latitude || 33.5143656, telemetry?.longitude || 36.2736165]} icon={droneIcon} rotationOrigin="center center">
                 <Popup>MAV Location</Popup>
             </Marker>
         </MapContainer>

@@ -1,21 +1,47 @@
 import asyncio
-from threading import Thread
+import time
+import threading
 
-from app.mavlink import connect
-from app.telemetry import update_telemetry
+from app.mavlink import connect, receive
+from app.telemetry import update_telemetry, telemetry
+from app.api import create_flight, send_telemetry
 from app.websocket import start_server
 
-def telemetry_loop():
-    connect()
+def run_websocket():
+    asyncio.run(start_server())
 
-    while True:
-        update_telemetry()
+# Start websocket server
+websocket_thread = threading.Thread(
+    target=run_websocket,
+    daemon=True
+)
 
-async def main():
-    telemetry_thread = Thread(target=telemetry_loop, daemon=True)
-    telemetry_thread.start()
+websocket_thread.start()
 
-    await start_server()
+# Connect to mavlink
+master = connect()
 
-if __name__ == "__main__":
-    asyncio.run(main())
+telemetry["connection"] = True
+
+vehicle_id = 1
+flight_id = create_flight(vehicle_id)
+
+print(f"Flight started {flight_id}")
+
+last_api = 0
+
+while True:
+    msg = receive(master)
+
+    if msg:
+        update_telemetry(msg)
+        telemetry["connection"] = True
+    else:
+        telemetry["connection"] = False
+
+    now = time.time()
+
+    if telemetry["connection"] and now - last_api >= 1.0:
+        send_telemetry(vehicle_id, flight_id, telemetry)
+        print("Telemetry sent")
+        last_api = now

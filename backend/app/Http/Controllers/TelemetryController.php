@@ -4,16 +4,51 @@ namespace App\Http\Controllers;
 
 use App\Models\Vehicle;
 use App\Models\Telemetry;
+use App\Models\Flight;
 use Illuminate\Http\Request;
 
 class TelemetryController extends Controller
 {
-    public function store(Request $request, $vehicleId) {
+    public function index($vehicleId, $flightId) {
+        $vehicle = Vehicle::find($vehicleId);
+
+        if (!$vehicle) {
+            return response()->json([
+                'message' => 'Vehicle not found.',
+            ], 404);
+        }
+
+        $flight = Flight::where('id', $flightId)
+            ->where('vehicle_id', $vehicleId)
+            ->first();
+
+        if (!$flight) {
+            return response()->json([
+                'message' => 'Flight not found.',
+            ], 404);
+        }
+
+        return response()->json([
+            'data' => $flight->telemetries()->latest()->get(),
+        ], 200);
+    }
+
+    public function store(Request $request, $vehicleId, $flightId) {
         $vehicle = Vehicle::find($vehicleId);
 
         if(!$vehicle) {
             return response()->json([
                 'message' => 'Vehicle not found.',
+            ], 404);
+        }
+
+        $flight = Flight::where('id', $flightId)
+            ->where('vehicle_id', $vehicleId)
+            ->first();
+
+        if (!$flight) {
+            return response()->json([
+                'message' => 'Flight not found.',
             ], 404);
         }
 
@@ -42,7 +77,7 @@ class TelemetryController extends Controller
         ]);
 
         $telemetry = Telemetry::create([
-            'vehicle_id' => $vehicle->id,
+            'flight_id' => $flight->id,
             ...$validated,
         ]);
 
@@ -51,7 +86,7 @@ class TelemetryController extends Controller
         ], 201);
     }
 
-    public function latest($vehicleId) {
+    public function latest($vehicleId, $flightId) {
         $vehicle = Vehicle::find($vehicleId);
 
         if (!$vehicle) {
@@ -60,42 +95,26 @@ class TelemetryController extends Controller
             ], 404);
         }
 
-        $telemetry = $vehicle->telemetries()
-            ->latest()
+        $flight = Flight::where('id', $flightId)
+            ->where('vehicle_id', $vehicleId)
             ->first();
+
+        if (!$flight) {
+            return response()->json([
+                'message' => 'Flight not found.',
+            ], 404);
+        }
+
+        $telemetry = $flight->telemetries()->latest()->first();
 
         if (!$telemetry) {
             return response()->json([
-                "message" => "No telemetries found for this vehicle"
+                "message" => "No telemetries found."
             ], 404);
         }
 
         return response()->json([
             'data' => $telemetry
-        ], 200);
-    }
-
-    public function history($vehicleId) {
-        $vehicle = Vehicle::find($vehicleId);
-
-        if (!$vehicle) {
-            return response()->json([
-                'message' => 'Vehicle not found.',
-            ], 404);
-        }
-        
-        $telemetries = $vehicle->telemetries()
-            ->latest()
-            ->get();
-        
-        if (!$telemetries) {
-            return response()->json([
-                'message' => 'No telemetries found for this vehicle.',
-            ], 404);
-        }
-
-        return response()->json([
-            'data' => $telemetries,
         ], 200);
     }
 }
