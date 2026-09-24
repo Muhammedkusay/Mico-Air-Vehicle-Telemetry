@@ -15,23 +15,23 @@ Each vehicle has its own `system_id` and flight history.
 
 ### Dashboard
 
-![Dashboard Screenshot](images/dashboard.png)
+![Dashboard Screenshot](images/dashboard.webp)
 
 ### Vehicles Page
 
-![Flight Details Screenshot](images/vehicles-page.png)
+![Flight Details Screenshot](images/vehicles-page.webp)
 
 ### Flights Page
 
-![Flight Details Screenshot](images/flights-page.png)
+![Flight Details Screenshot](images/flights-page.webp)
 
 ### Flight Details
 
-![Flight Details Screenshot](images/flight-details.png)
+![Flight Details Screenshot](images/flight-details.webp)
 
 ## Data Flow
 
-![Architecture Diagram](images/Architecture-Diagram.png)
+<img src="images/Architecture-Diagram.png" alt="Architecture" style="width: 50%;">
 
 ## Project Architecture
 
@@ -81,7 +81,7 @@ project/
 
 ## Database Structure
 
-![Database Diagram](images/Database-diagram.png)
+![Database Diagram](images/Database-diagram.webp)
 
 A vehicle can have multiple flights, and each flight contains multiple telemetry records.
 
