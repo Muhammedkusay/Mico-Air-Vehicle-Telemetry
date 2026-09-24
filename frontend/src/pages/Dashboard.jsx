@@ -13,6 +13,7 @@ function App() {
   const [connected, setConnected] = useState(true)
   const [telemetry, setTelemetry] = useState({
     "connection": true,
+    "system_id": 2,
     "mode": "STABILIZE",
     "armed": true,
     "altitude": 0,
@@ -52,7 +53,7 @@ function App() {
         </div>
         {/* works if mavlink and websocket are connected */}
         {connectionState && <div>
-          <div className="flex flex-col lg:flex-row items-center justify-around gap-12 mx-auto">
+          <div className="flex flex-col lg:flex-row items-center justify-around gap-10 mx-auto">
             <Map telemetry={telemetry}/>
             <Pfd telemetry={telemetry}/>
           </div>

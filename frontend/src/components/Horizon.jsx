@@ -23,7 +23,7 @@ export default function Horizon({telemetry}) {
             if(horizonRef.current) {
                 horizonRef.current.style.transform = 
                     `translateY(${currentPitch.current * 6}px)` +
-                    `rotate(${currentRoll.current}deg)`
+                    `rotate(${-currentRoll.current}deg)`
             }
 
             animationFrame = requestAnimationFrame(animate)

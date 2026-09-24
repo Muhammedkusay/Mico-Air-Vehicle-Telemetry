@@ -5,6 +5,8 @@ from time import time
 
 telemetry = {
     "connection": False,
+    "system_id": None,
+    
     "mode": None,
     "armed": None,
 

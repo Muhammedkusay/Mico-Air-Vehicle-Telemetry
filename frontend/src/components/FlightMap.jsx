@@ -21,10 +21,10 @@ export default function FlightMap({telemetry, setDistance}) {
 
     const [path, setPath] = useState([])
 
-    const redCircleIcon = L.divIcon({
+    const circleIcon = L.divIcon({
         html: `<div style="
-            width: 10px; 
-            height: 10px; 
+            width: 8px; 
+            height: 8px; 
             background-color: blue; 
             border-radius: 50%; 
             border: 2px solid white; 
@@ -83,7 +83,7 @@ export default function FlightMap({telemetry, setDistance}) {
 
             {
                 path.map((element, index) => 
-                    (element[0] && element[1]) && (<Marker key={`${element[0]}-${element[1]}-${index}`} position={[element[0], element[1]]} icon={redCircleIcon}>
+                    (element[0] && element[1]) && (<Marker key={`${element[0]}-${element[1]}-${index}`} position={[element[0], element[1]]} icon={circleIcon}>
                         {index == 0 && <Popup>First Node</Popup>}
                         {index == path.length - 1 && <Popup>Last Node</Popup>}
                         {(index != 0 && index != path.length - 1) &&<Popup>MAV Path Node {index + 1}</Popup>}

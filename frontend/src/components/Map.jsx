@@ -4,13 +4,13 @@ import "leaflet/dist/leaflet.css"
 import "leaflet-rotatedmarker"
 import { useEffect, useRef } from "react"
 
-const droneIcon = new L.Icon({
-    iconUrl: "/MAV_ICON_LATEST.png",
-    iconSize: [50, 50],
-    iconAnchor: [25, 25],
-})
-
 export default function Map({telemetry}) {
+    const droneIcon = new L.Icon({
+        iconUrl: telemetry.system_id == 1 ? "/COPTER_ICON.png" : "/PLANE_ICON.png",
+        iconSize: [45, 45],
+        iconAnchor: [25, 25],
+    })
+    
     const markerRef = useRef(null)
     
     const currentHeading = useRef(0)
@@ -56,7 +56,7 @@ export default function Map({telemetry}) {
     return (
         <MapContainer
             center={[telemetry?.latitude || 33.5143656, telemetry?.longitude || 36.2736165]}
-            zoom={18}
+            zoom={16}
             style={{ height: "500px", width: "100%", borderRadius: '12px', border:'2px solid #ccc', zIndex: '1' }}
         >
             <TileLayer

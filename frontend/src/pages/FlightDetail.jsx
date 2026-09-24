@@ -46,7 +46,7 @@ export default function FlightDetails() {
                 {/* info card */}
                 <div className="mb-4 pb-1.5 pt-1 px-2.5 bg-slate-700 text-white text-center">
                     <div className="w-full md:w-[90%] mx-auto flex items-center justify-between">
-                        <p>Vehicle: {vehicleId} / Flight: {flightId}</p>
+                        <p>Vehicle: {vehicleId}</p>
                         <p>{distance.toFixed(2)}m</p>
                         <div>{new Date(telemetry[telemetry.length - 1].created_at).toLocaleString()} - {new Date(telemetry[0].created_at).toLocaleString()}</div>
                     </div>

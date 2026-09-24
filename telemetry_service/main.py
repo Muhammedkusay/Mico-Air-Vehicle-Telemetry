@@ -21,10 +21,11 @@ websocket_thread.start()
 # Connect to mavlink
 master = connect()
 
+telemetry["system_id"] = master.target_system
 telemetry["connection"] = True
+print(telemetry["system_id"])
 
-vehicle_id = 1
-flight_id = create_flight(vehicle_id)
+flight_id = create_flight(telemetry["system_id"])
 
 print(f"Flight started {flight_id}")
 
@@ -42,6 +43,6 @@ while True:
     now = time.time()
 
     if telemetry["connection"] and now - last_api >= 1.0:
-        send_telemetry(vehicle_id, flight_id, telemetry)
+        send_telemetry(telemetry["system_id"], flight_id, telemetry)
         print("Telemetry sent")
         last_api = now

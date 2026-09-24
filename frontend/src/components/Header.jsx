@@ -13,7 +13,7 @@ export default function Header() {
                 </Link>
                 <nav className="flex items-center gap-3">
                     <Link to={'/dashboard'} className="hover:underline">Dashboard</Link>
-                    <Link to={'/vehicles/1/flights'} className="hover:underline">Flights</Link>
+                    <Link to={'/vehicles'} className="hover:underline">Vehicles</Link>
                 </nav>
             </div>
         </header>
