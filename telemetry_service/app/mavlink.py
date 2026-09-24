@@ -9,7 +9,6 @@ def connect():
     master.wait_heartbeat()
 
     print(f"Connected to system {master.target_system}")
-    print(f"Component {master.target_component}")
 
     return master
 

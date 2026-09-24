@@ -5,7 +5,7 @@ import "leaflet-rotatedmarker"
 import { useEffect, useRef } from "react"
 
 const droneIcon = new L.Icon({
-    iconUrl: "/MAV_ICON.png",
+    iconUrl: "/MAV_ICON_LATEST.png",
     iconSize: [50, 50],
     iconAnchor: [25, 25],
 })
@@ -56,12 +56,12 @@ export default function Map({telemetry}) {
     return (
         <MapContainer
             center={[telemetry?.latitude || 33.5143656, telemetry?.longitude || 36.2736165]}
-            zoom={16}
+            zoom={18}
             style={{ height: "500px", width: "100%", borderRadius: '12px', border:'2px solid #ccc', zIndex: '1' }}
         >
             <TileLayer
-                attribution='&copy; OpenStreetMap contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+                attribution="Tiles &copy; Esri"
             />
 
             <Marker ref={markerRef} position={[telemetry?.latitude || 33.5143656, telemetry?.longitude || 36.2736165]} icon={droneIcon} rotationOrigin="center center">

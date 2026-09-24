@@ -14,6 +14,7 @@ export default function FlightDetails() {
     const { vehicleId, flightId } = useParams();
 
     const [telemetry, setTelemetry] = useState([]);
+    const [distance, setDistance] = useState(0);
 
     const { request, loading, error } = useApi();
 
@@ -46,29 +47,28 @@ export default function FlightDetails() {
                 <div className="mb-4 pb-1.5 pt-1 px-2.5 bg-slate-700 text-white text-center">
                     <div className="w-full md:w-[90%] mx-auto flex items-center justify-between">
                         <p>Vehicle: {vehicleId} / Flight: {flightId}</p>
+                        <p>{distance.toFixed(2)}m</p>
                         <div>{new Date(telemetry[telemetry.length - 1].created_at).toLocaleString()} - {new Date(telemetry[0].created_at).toLocaleString()}</div>
                     </div>
                 </div>
                 {/* map & charts */}
                 <div className="w-full md:w-[90%] md:mx-auto">
                     {/* map */}
-                    <div className="flex flex-col md:flex-row items-start justify-between gap-4">
-                        <div className="w-full m-4 md:m-0 shadow-sm rounded-xl border border-slate-300">
-                            <FlightMap telemetry={telemetry}/>
-                        </div>
+                    <div className="w-full m-4 md:m-0 shadow-sm rounded-xl border border-slate-300">
+                        <FlightMap telemetry={telemetry} setDistance={setDistance}/>
                     </div>
                     {/* charts */}
-                    <div className="mt-4 flex flex-col md:flex-row items-start justify-between gap-4">
+                    <div className="mt-4 grid grid-cols-1 lg:grid-cols-3 gap-4">
                         {/* altitude chart */}
-                        <div className="w-full md:w-1/2 m-4 md:m-0">
+                        <div className="w-fit md:w-full m-4 md:m-0">
                             <AltitudeChart telemetry={telemetry}/>
                         </div>
                         {/* ground speed chart */}
-                        <div className="w-full md:w-1/2 m-4 md:m-0">
+                        <div className="w-fit md:w-full m-4 md:m-0">
                             <SpeedChart telemetry={telemetry}/>
                         </div>
                         {/* battery remaining chart */}
-                        <div className="w-full md:w-1/2 m-4 md:m-0">
+                        <div className="w-fit md:w-full m-4 md:m-0">
                             <BatteryChart telemetry={telemetry}/>
                         </div>
                     </div>

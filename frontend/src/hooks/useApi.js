@@ -19,11 +19,13 @@ export function useApi() {
                 }
             })
 
+            const result = await response.json()
+
             if(!response.ok) {
-                throw new Error(`API error: ${response.status}`)
+                throw new Error(result.message || "Server Error")
             }
 
-            return await response.json()
+            return result
         } catch(error) {
             setError(error.message)
             throw error

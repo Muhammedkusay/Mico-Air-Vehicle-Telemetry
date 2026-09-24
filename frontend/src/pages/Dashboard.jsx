@@ -7,22 +7,23 @@ import ConnectionState from '../components/ConnectionState'
 import Header from '../components/Header'
 
 function App() {
-  const {telemetry, connected} = useTelemetry()
+  // const {telemetry, connected} = useTelemetry()
 
   // dummy data
-  // const [connected, setConnected] = useState(true)
-  // const [telemetry, setTelemetry] = useState({
-  //   "connection": true,
-  //   "mode": "STABILIZE",
-  //   "armed": true,
-  //   "altitude": 0,
-  //   "pitch": 0,
-  //   "roll": 0,
-  //   "yaw": 0,
-  //   "heading": 0,
-  //   "latitude": 33.5139,
-  //   "longitude": 36.2766,
-  // })
+  const [connected, setConnected] = useState(true)
+  const [telemetry, setTelemetry] = useState({
+    "connection": true,
+    "mode": "STABILIZE",
+    "armed": true,
+    "altitude": 0,
+    "pitch": 0,
+    "roll": 0,
+    "yaw": 0,
+    "heading": 0,
+    "latitude": 36.183384,
+    "longitude": 37.227871,
+    "ground_speed": 0,
+  })
 
   const [connectionState, setConnectionState] = useState(false)
 
@@ -45,7 +46,7 @@ function App() {
     <main>
       <Header />
       <div className='w-[90%] mx-auto'>
-        <div className='p-0.5 my-2.5 flex flex-row-reverse items-center justify-between'>
+        <div className='p-2 my-2.5 flex flex-row-reverse items-center justify-between bg-slate-50 border border-slate-300 rounded-lg'>
           <ConnectionState websocket={connected} mavlink={telemetry.connection} />
           <Battery battery_remaining={telemetry.battery_remaining}/>
         </div>

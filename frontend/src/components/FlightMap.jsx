@@ -3,8 +3,21 @@ import L from "leaflet"
 import "leaflet/dist/leaflet.css"
 import { useEffect, useState } from "react"
 
+function FitMapToPath({path}) {
+    const map = useMap()
 
-export default function FlightMap({telemetry}) {
+    useEffect(() => {
+        if(path.length > 0) {
+            map.fitBounds(path, {
+                padding: [30, 30]
+            })
+        }
+    }, path, map)
+
+    return null
+}
+
+export default function FlightMap({telemetry, setDistance}) {
 
     const [path, setPath] = useState([])
 
@@ -20,7 +33,7 @@ export default function FlightMap({telemetry}) {
         className: "custom-red-circle", 
         iconSize: 20,            
         iconAnchor: 0,          
-        })
+    })
 
     useEffect(() => {
         if (!telemetry || !Array.isArray(telemetry)) return;
@@ -47,21 +60,26 @@ export default function FlightMap({telemetry}) {
         });
 
         setPath(uniquePath)
+        // set path length in (m)
+        const diff = 10.5
+        setDistance(diff * path.length)
+
     }, [telemetry])
-    
+
     const defaultCenter = [33.5143656, 36.2736165];
-    const initialCenter = path.length > 0 ? [path[0][0], path[0][1]] : defaultCenter;
 
     return (
         <MapContainer
-            center={initialCenter}
+            center={defaultCenter}
             zoom={16}
             style={{ height: "400px", width: "100%", borderRadius: '12px', zIndex: '1' }}
         >
             <TileLayer
-                attribution='&copy; OpenStreetMap contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+                attribution="Tiles &copy; Esri"
             />
+
+            <FitMapToPath path={path}/>
 
             {
                 path.map((element, index) => 
