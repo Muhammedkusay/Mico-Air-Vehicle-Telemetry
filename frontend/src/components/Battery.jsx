@@ -10,23 +10,23 @@ export default function Battery({battery_remaining}) {
     switch(true) {
         case battery > 75:
             battery_status = faBatteryFull
-            styling = 'text-green-600 text-xl'
+            styling = 'text-green-600 text-lg'
             break
         case battery > 50:
             battery_status = faBatteryThreeQuarters
-            styling = 'text-green-600 text-xl'
+            styling = 'text-green-600 text-lg'
             break
         case battery > 25:
             battery_status = faBatteryHalf
-            styling = 'text-orange-600 text-xl'
+            styling = 'text-orange-600 text-lg'
             break
         case battery > 0:
             battery_status = faBatteryQuarter
-            styling = 'text-red-600 text-xl'
+            styling = 'text-red-600 text-lg'
             break
         case battery == 0:
             battery_status = faBatteryEmpty
-            styling = 'text-red-600 text-xl'
+            styling = 'text-red-600 text-lg'
             break
         default:
             battery_status = null

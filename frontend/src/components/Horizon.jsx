@@ -55,7 +55,7 @@ export default function Horizon({telemetry}) {
             </div>
 
             {/* horizon */}
-            <div className="w-[400px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <div className="w-[1200px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                 <div ref={horizonRef} className="w-full text-white text-xl font-semibold">
                     {/* sky */}
                     <div className="h-[720px] bg-sky-500">

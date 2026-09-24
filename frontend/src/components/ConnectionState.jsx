@@ -3,7 +3,7 @@ export default function ConnectionState({websocket, mavlink}) {
 
     return(
         <>
-            <div className={`z-15 group relative w-fit px-2 pt-1 pb-1.5 flex items-center justify-center rounded-md gap-2 cursor-default ${websocket && mavlink ? 'text-green-600 bg-green-100 border border-green-500' : 'text-red-700 bg-red-100 border border-red-700'}`}>
+            <div className={`z-15 group relative w-fit px-2 pt-0.5 pb-1 flex items-center justify-center rounded-md gap-2 cursor-default ${websocket && mavlink ? 'text-green-600 bg-green-100 border border-green-500' : 'text-red-700 bg-red-100 border border-red-700'}`}>
                 <p>{websocket && mavlink ? "Connected" : "Disconnected"}</p>
                 <div className={`w-2 h-2 rounded-full ${websocket && mavlink ? 'bg-green-600 animate-pulse' : 'bg-red-700'}`}></div>
                 
