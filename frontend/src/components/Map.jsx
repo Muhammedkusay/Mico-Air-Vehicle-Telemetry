@@ -57,7 +57,7 @@ export default function Map({telemetry}) {
         <MapContainer
             center={[telemetry?.latitude || 33.5143656, telemetry?.longitude || 36.2736165]}
             zoom={16}
-            style={{ height: "500px", width: "100%", borderRadius: '12px', border:'2px solid #ccc', zIndex: '1' }}
+            style={{ height: "550px", width: "100%", borderRadius: '12px', border:'2px solid #ccc', zIndex: '1' }}
         >
             <TileLayer
                 url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"

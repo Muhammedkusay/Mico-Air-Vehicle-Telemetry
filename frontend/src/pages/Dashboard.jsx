@@ -7,24 +7,24 @@ import ConnectionState from '../components/ConnectionState'
 import Header from '../components/Header'
 
 function App() {
-  // const {telemetry, connected} = useTelemetry()
+  const {telemetry, connected} = useTelemetry()
 
   // dummy data
-  const [connected, setConnected] = useState(true)
-  const [telemetry, setTelemetry] = useState({
-    "connection": true,
-    "system_id": 2,
-    "mode": "STABILIZE",
-    "armed": true,
-    "altitude": 0,
-    "pitch": 0,
-    "roll": 0,
-    "yaw": 0,
-    "heading": 0,
-    "latitude": 36.183384,
-    "longitude": 37.227871,
-    "ground_speed": 0,
-  })
+  // const [connected, setConnected] = useState(true)
+  // const [telemetry, setTelemetry] = useState({
+  //   "connection": true,
+  //   "system_id": 2,
+  //   "mode": "STABILIZE",
+  //   "armed": false,
+  //   "altitude": 0,
+  //   "pitch": 0,
+  //   "roll": 0,
+  //   "yaw": 0,
+  //   "heading": 0,
+  //   "latitude": 36.183184,
+  //   "longitude": 37.229871,
+  //   "ground_speed": 0,
+  // })
 
   const [connectionState, setConnectionState] = useState(false)
 

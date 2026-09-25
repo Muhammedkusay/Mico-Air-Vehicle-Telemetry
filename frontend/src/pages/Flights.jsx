@@ -17,7 +17,7 @@ export default function Flights() {
         const fetchFlights = async () => {
             try {
                 const result = await request(`/vehicles/${vehicleId}/flights`)
-                setFlights(result.data)
+                setFlights(result.data.reverse())
             } catch(error) {
                 console.error(error)
             }

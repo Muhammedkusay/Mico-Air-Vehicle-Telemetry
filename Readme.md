@@ -83,6 +83,16 @@ project/
 
 ![Database Diagram](images/Database-diagram.webp)
 
+## Api Endpoints
+/vehicles
+/vehicles/{vehicle}
+/vehicles/{vehicle}/flights
+/vehicles/{vehicle}/flights
+/vehicles/{vehicle}/flights/{flight}
+/vehicles/{vehicle}/flights/{flight}/telemetry
+/vehicles/{vehicle}/flights/{flight}/telemetry
+/vehicles/{vehicle}/flights/{flight}/telemetry/latest
+
 A vehicle can have multiple flights, and each flight contains multiple telemetry records.
 
 Each vehicle has a unique MAVLink `system_id`.

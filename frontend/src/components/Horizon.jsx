@@ -20,10 +20,12 @@ export default function Horizon({telemetry}) {
             currentRoll.current += (targetRoll.current - currentRoll.current) * 0.15
             currentPitch.current += (targetPitch.current - currentPitch.current) * 0.15
 
+            const pitchScale = 6
             if(horizonRef.current) {
-                horizonRef.current.style.transform = 
-                    `translateY(${currentPitch.current * 6}px)` +
-                    `rotate(${-currentRoll.current}deg)`
+                const pitchOffset = currentPitch.current * pitchScale
+                const rollAngle = -currentRoll.current
+
+                horizonRef.current.style.transform = `rotate(${rollAngle}deg) translateY(${pitchOffset}px)`
             }
 
             animationFrame = requestAnimationFrame(animate)
